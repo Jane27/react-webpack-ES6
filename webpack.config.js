@@ -58,10 +58,10 @@ module.exports = {
             //.css 文件使用 style-loader 和 css-loader 来处理
              {
                  test: /\.css$/,
-                 loader: 'style!css'
+                 loader: 'style-loader!css-loader'
             }, {
                 test: /\.less$/,
-                loader: 'style!css!less'
+                loader: 'style-loader!less-loader'
             },
             //图片文件使用url-loader 处理 '?limit=8192'表示将所有小于8kb的图片都转为base64形式
             {test: /.(png|jpg)$/, loader: 'url-loader?limit=8192'}
