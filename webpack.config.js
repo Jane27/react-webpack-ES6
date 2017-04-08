@@ -22,6 +22,9 @@ module.exports = {
         contentBase: './components',
         port: 9121
     },
+    // eslint: {
+    //     configFile: './.eslintrc'
+    // },
 
     //入口文件,需要处理的文件路径
     entry: [
@@ -47,14 +50,20 @@ module.exports = {
             //js
             {
                 //首先匹配文件后缀
-                test: /\.js[x]?$/,
+                test: /\.jsx?$/,
                 //然后指定作用范围,这里可不写,但是范围越小速度越快
                 include: path.resolve(__dirname, 'components'),
                 //排除目录,exclude后将不匹配
                 exclude: /node_modules/,
                 //加载的loader,上面匹配到的文件都通过下面的loader来处理编译,这里是babel-es6+react
-                loader: 'babel-loader?presets[]=react,presets[]=es2015'
+                loader: 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-0'
             },
+            // {
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     loader: 'eslint-loader'
+            // },
+
             //.css 文件使用 style-loader 和 css-loader 来处理
              {
                  test: /\.css$/,
@@ -66,6 +75,9 @@ module.exports = {
             //图片文件使用url-loader 处理 '?limit=8192'表示将所有小于8kb的图片都转为base64形式
             {test: /.(png|jpg)$/, loader: 'url-loader?limit=8192'}
         ]
+    },
+    resolve: {
+        extensions: [' ','.js','.jsx','.json']
     },
     //插件
     plugins: [

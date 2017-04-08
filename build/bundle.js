@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6224c7a64f1bb2027cf3"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fc848312c622e8ee7b1f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -10106,10 +10106,12 @@ __webpack_require__(186);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import App from './App'
+//import Counter from './Counter/Counter'
+
 
 _reactDom2.default.render(
-//  <App/>,
+
+// <Counter/>,
 
 document.getElementById('root')); /**
                                    * Created by wangjing on 3/4/2017.
