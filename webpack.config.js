@@ -7,7 +7,7 @@ var webpack = require('webpack');
 var path = require('path');
 //#resolve可以把相对路径转换成绝对路径
 var ROOT_PATH = path.resolve(__dirname);
-var APP_PATH = path.resolve(__dirname, './components/index.js');
+var APP_PATH = path.resolve(__dirname, './src/index.js');
 var BUILD_PATH = path.resolve(__dirname, './build');
 
 //输出HTML和CSS等等文件到路径的插件
@@ -19,7 +19,7 @@ module.exports = {
         historyApiFallback: true,
         hot: true,
         inline: true,
-        contentBase: './components',
+        contentBase: './src',
         port: 9121
     },
     // eslint: {
@@ -52,7 +52,7 @@ module.exports = {
                 //首先匹配文件后缀
                 test: /\.jsx?$/,
                 //然后指定作用范围,这里可不写,但是范围越小速度越快
-                include: path.resolve(__dirname, 'components'),
+                include: path.resolve(__dirname, 'src'),
                 //排除目录,exclude后将不匹配
                 exclude: /node_modules/,
                 //加载的loader,上面匹配到的文件都通过下面的loader来处理编译,这里是babel-es6+react
@@ -65,19 +65,25 @@ module.exports = {
             // },
 
             //.css 文件使用 style-loader 和 css-loader 来处理
-             {
-                 test: /\.css$/,
-                 loader: 'style-loader!css-loader'
-            }, {
-                test: /\.less$/,
-                loader: 'style-loader!less-loader'
+            {
+                test: /\.scss/,
+                loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
+            },
+            {
+                test: /\.css$/,
+                loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
             },
             //图片文件使用url-loader 处理 '?limit=8192'表示将所有小于8kb的图片都转为base64形式
-            {test: /.(png|jpg)$/, loader: 'url-loader?limit=8192'}
-        ]
+            {
+                test: /.(png|jpg)$/,
+                loader: 'url-loader?limit=8192'
+            }, {
+                test: /\.json$/,
+                loader: 'json-loader'},
+        ],
     },
     resolve: {
-        extensions: [' ','.js','.jsx','.json']
+        extensions: [' ','.js','.jsx']
     },
     //插件
     plugins: [
@@ -85,7 +91,7 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         //输出文件插件,最顶上有引入
         new CopyWebpackPlugin([
-            { from: './index.html', to: 'index.html' },
+            { from: './src/index.html', to: 'index.html' },
         ]),
         //以下代码为压缩代码插件,在打包的时候用,开发环境下会减慢编译速度
         //new webpack.optimize.UglifyJsPlugin({
