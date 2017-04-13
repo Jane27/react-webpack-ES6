@@ -66,8 +66,12 @@ module.exports = {
 
             //.css 文件使用 style-loader 和 css-loader 来处理
             {
+                test: /\.sass/,
+                loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+            },
+            {
                 test: /\.scss/,
-                loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
+                loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader?outputStyle=expanded'
             },
             {
                 test: /\.css$/,
@@ -75,8 +79,11 @@ module.exports = {
             },
             //图片文件使用url-loader 处理 '?limit=8192'表示将所有小于8kb的图片都转为base64形式
             {
-                test: /.(png|jpg)$/,
+                test: /.png$/,
                 loader: 'url-loader?limit=8192'
+            },
+            {
+                test: /\.jpg$/, loader: "file-loader"
             }, {
                 test: /\.json$/,
                 loader: 'json-loader'},
